@@ -40,7 +40,7 @@ def addCar(model, company_name, year_of_production, country_of_production):
     if len(cars) == 0:
         final_id = 100
     else:
-        final_id = max(cars, key=lambda x: x.id).id +1
+        final_id = max(cars, key=lambda x: x.id).id +2
 
         car = Car(final_id, model, company_name, year_of_production, country_of_production)
         cars.append(car)

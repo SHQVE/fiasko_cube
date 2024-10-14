@@ -20,6 +20,6 @@ from wtforms.validators import DataRequired, Email
 
 class SignUpForm(FlaskForm):
     model = StringField('Модель авто', validators=[DataRequired()])
-    company_name = StringField('Название компании', validators=[DataRequired()])
+    company_name = StringField('Название компании!', validators=[DataRequired()])
     year_of_production = IntegerField('Год издания', default=2024, validators=[DataRequired()])
     country_of_production = StringField('Страна производства', validators=[DataRequired()])
