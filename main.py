@@ -1,9 +1,11 @@
 from typing import final
 
 from flask import Flask, render_template, redirect
+from grz import generate_grz
 from dataclasses import asdict
 from random import randint
 
+import grz
 from forms.SignUpForm import SignUpForm
 from forms.form import GravitationForm
 from models.Car import Car
@@ -21,8 +23,8 @@ cars = []
 
 def generate_cars(n: int):
     for i in range(n):
-        id = randint(100, 1000)
-        car = Car(i, "Corvette C7", "Chevrolet", 2019, "USA")
+        grz_car = grz.generate_grz()
+        car = Car(grz_car, "Corvette C7", "Chevrolet", 2019, "USA")
         cars.append(car)
 
 
@@ -37,12 +39,12 @@ def generate_cars(n: int):
 
 
 def addCar(model, company_name, year_of_production, country_of_production):
-    if len(cars) == 0:
-        final_id = 100
-    else:
-        final_id = max(cars, key=lambda x: x.id).id +2
+    # if len(cars) == 0:
+    #     final_id = 0
+    # else:
+    #     final_id = max(cars, key=lambda x: x.id).id + 1
 
-        car = Car(final_id, model, company_name, year_of_production, country_of_production)
+        car = Car(model, company_name, year_of_production, country_of_production)
         cars.append(car)
 
 
@@ -78,7 +80,7 @@ def getCars():
 
 
 @app.route("/cars/<int:car_id>")
-def getCar(car_id: int):
+def getCar(car_id: str):
     for car in cars:
         if car.id == car_id:
             return asdict(car)
@@ -87,7 +89,7 @@ def getCar(car_id: int):
 
 
 @app.route("/delCar/<int:car_id>")
-def delCar(car_id: int):
+def delCar(car_id: str):
     for car in cars:
         if car.id == car_id:
             cars.remove(car)
@@ -97,6 +99,6 @@ def delCar(car_id: int):
 
 
 if __name__ == '__main__':
-    generate_cars(2)
+    generate_cars(5)
     app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
     app.run(debug=True, port=8888)

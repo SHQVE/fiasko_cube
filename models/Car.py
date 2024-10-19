@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class Car:
-    id: int
+    id: str
     model: str
     company_name: str
     year_of_production: int
