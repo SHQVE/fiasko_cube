@@ -39,10 +39,7 @@ def generate_cars(n: int):
 
 
 def addCar(model, company_name, year_of_production, country_of_production):
-    # if len(cars) == 0:
-    #     final_id = 0
-    # else:
-    #     final_id = max(cars, key=lambda x: x.id).id + 1
+
     grz_car = grz.generate_grz()
     car = Car(grz_car, model, company_name, year_of_production, country_of_production)
     cars.append(car)
