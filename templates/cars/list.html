@@ -2,9 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <title>List Cars</title>
 </head>
 <body>
-
+<span class="p-2 m-0">{{ count }}</span>
+<a href="/signUp" type="button" class="btn btn-primary m-2">Зарегистрировать машину</a>
+<div class="list-group overflow-auto p-2">
+    {% for car in cars %}
+    <a href="users/{{ user.id }}" class="list-group-item list-group-item-action" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ car.company_name }}</h5>
+            <small>{{ car.country_of_production }}</small>
+        </div>
+        <p class="mb-1">{{ car.model }}</p>
+        <small>{{ car.year_of_production }}</small>
+    </a>
+    {% endfor %}
+</div>
 </body>
 </html>

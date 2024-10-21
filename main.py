@@ -43,9 +43,9 @@ def addCar(model, company_name, year_of_production, country_of_production):
     #     final_id = 0
     # else:
     #     final_id = max(cars, key=lambda x: x.id).id + 1
-
-        car = Car(model, company_name, year_of_production, country_of_production)
-        cars.append(car)
+    grz_car = grz.generate_grz()
+    car = Car(grz_car, model, company_name, year_of_production, country_of_production)
+    cars.append(car)
 
 
 app = Flask(__name__)
