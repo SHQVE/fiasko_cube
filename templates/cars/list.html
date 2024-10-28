@@ -14,7 +14,7 @@
 <a href="/signUp" type="button" class="btn btn-primary m-2">Зарегистрировать машину</a>
 <div class="list-group overflow-auto p-2">
     {% for car in cars %}
-    <a href="users/{{ user.id }}" class="list-group-item list-group-item-action" aria-current="true">
+    <a href="cars/{{ car.id }}" class="list-group-item list-group-item-action" aria-current="true">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{ car.company_name }}</h5>
             <small>{{ car.country_of_production }}</small>

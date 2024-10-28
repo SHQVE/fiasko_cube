@@ -66,14 +66,14 @@ def signUp():
 
 
         addCar(model, company_name, year_of_production, country_of_production)
-        return redirect("/cars")
+        return redirect("/garage")
 
     return render_template("formTemplate.html", form=form, btn_name="Зарегистрировать авто")
 
 
-@app.route("/cars", methods=['GET', 'POST'])
+@app.route("/garage", methods=['GET', 'POST'])
 def getCars():
-    return cars
+    return render_template("cars/list.html", cars=cars, count=len(cars))
 
 
 @app.route("/cars/<int:car_id>")
