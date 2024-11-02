@@ -23,3 +23,7 @@ class SignUpForm(FlaskForm):
     company_name = StringField('Название компании!', validators=[DataRequired()])
     year_of_production = IntegerField('Год издания', default=2024, validators=[DataRequired()])
     country_of_production = StringField('Страна производства', validators=[DataRequired()])
+    power = IntegerField('Мощность', validators=[DataRequired()])
+    mileage = IntegerField('Пробег', validators=[DataRequired()])
+    transmission = SelectField('КПП', choices=[("Automatic", "Автоматическая"), ("Mechanical", "Механика"), ("Robotic", "Роботизированная"), ("Variative", "Вариативная")])
+    actuator = SelectField('Привод', choices=[("Rear", "Задний (RWD)"), ("Front", "Передний (FWD)"), ("Full", "Полный (AWD / 4WD)")])

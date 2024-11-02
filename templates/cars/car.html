@@ -7,15 +7,24 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-<div class="card m-2" style="width: 18rem;">
+<div class="card m-2" style="width:119rem;">
     <div class="card-body">
         <h5 class="card-title"> {{ car.company_name }}</h5>
         <p class="card-text">Model: {{ car.model }} </p>
+        <p class="card-text">Power: {{ car.power }} </p>
+        <p class="card-text">Mileage: {{ car.mileage }} </p>
+        <p class="card-text">Transmission: {{ car.transmission }} </p>
+        <p class="card-text">Actuator: {{ car.actuator }} </p>
+        <p class="card-text">Color: {{ car.color }} </p>
+        <p class="card-text">Steering_wheel: {{ car.steering_wheel }} </p>
+        <p class="card-text">Body: {{ car.body }} </p>
+        <p class="card-text">Engine_displacement: {{ car.engine_displacement }} </p>
+        <p class="card-text">Status: {{ car.status }} </p>
         <p class="card-text">Grz: {{ car.id }} </p>
         <p class="card-text">Country: {{ car.country_of_production }} </p>
         <p class="card-text">Year: {{ car.year_of_production }} </p>
         <a href="/delUser/{{ car.id }}" type="button" class="btn btn-danger w-100" id="btnDel">Удалить</a>
-        <a href="/cars" type="button" class="btn btn-light w-100 mt-2">Обратно</a>
+        <a href="/garage" type="button" class="btn btn-dark w-100 mt-3">Обратно</a>
     </div>
 </div>
 <script>

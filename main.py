@@ -14,13 +14,6 @@ from models.User import User
 cars = []
 
 
-# def generate_users(n: int):
-#     for i in range(n):
-#         age = randint(1, 100)
-#         user = User(i, "test@example.com", "test", age, f"city{i}", "", "12345")
-#         users.append(user)
-
-
 def generate_cars(n: int):
     for i in range(n):
         grz_car = grz.generate_grz()
@@ -28,20 +21,10 @@ def generate_cars(n: int):
         cars.append(car)
 
 
-# def addUser(email, name, age, city, password):
-#     if len(users) == 0:
-#         last_id = 0
-#     else:
-#         last_id = max(users, key=lambda x: x.id).id + 1
-#
-#     user = User(last_id, email, name, age, city, "", password)
-#     users.append(user)
-
-
-def addCar(model, company_name, year_of_production, country_of_production):
+def addCar(model, company_name, year_of_production, country_of_production, power, mileage, transmission, actuator, color, steering_wheel, body, engine_displacement, status):
 
     grz_car = grz.generate_grz()
-    car = Car(grz_car, model, company_name, year_of_production, country_of_production)
+    car = Car(grz_car, model, company_name, year_of_production, country_of_production, power, mileage, transmission, actuator, color, steering_wheel, body, engine_displacement, status)
     cars.append(car)
 
 
@@ -63,9 +46,20 @@ def signUp():
         company_name = form.company_name.data
         year_of_production = form.year_of_production.data
         country_of_production = form.country_of_production.data
+        power = form.power.data
+        mileage = form.mileage.data
+        transmission = form.transmission.data
+        actuator = form.actuator.data
+        color = form.color.data
+        steering_wheel = form.steering_wheel.data
+        body = form.body.data
+        engine_displacement = form.engine_displacement.data
+        status = form.status.data
 
 
-        addCar(model, company_name, year_of_production, country_of_production)
+
+
+        addCar(model, company_name, year_of_production, country_of_production, power, mileage, transmission, actuator, color, steering_wheel, body, engine_displacement, status)
         return redirect("/garage")
 
     return render_template("formTemplate.html", form=form, btn_name="Зарегистрировать авто")
@@ -76,11 +70,11 @@ def getCars():
     return render_template("cars/list.html", cars=cars, count=len(cars))
 
 
-@app.route("/cars/<int:car_id>")
+@app.route("/cars/<car_id>")
 def getCar(car_id: str):
     for car in cars:
         if car.id == car_id:
-            return asdict(car)
+            return render_template("cars/car.html", car=car)
 
     return str(None)
 
