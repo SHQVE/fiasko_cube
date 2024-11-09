@@ -17,7 +17,7 @@ cars = []
 def generate_cars(n: int):
     for i in range(n):
         grz_car = grz.generate_grz()
-        car = Car(grz_car, "Corvette C7", "Chevrolet", 2019, "USA")
+        car = Car(grz_car, "Corvette C7", "Chevrolet", 2019, "USA", 1000, 500, "Механическая", "Задний", "Черный", "Правый", "Лифтбэк", 3.5, "небитый")
         cars.append(car)
 
 

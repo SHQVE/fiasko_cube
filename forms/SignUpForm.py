@@ -25,5 +25,36 @@ class SignUpForm(FlaskForm):
     country_of_production = StringField('Страна производства', validators=[DataRequired()])
     power = IntegerField('Мощность', validators=[DataRequired()])
     mileage = IntegerField('Пробег', validators=[DataRequired()])
-    transmission = SelectField('КПП', choices=[("Automatic", "Автоматическая"), ("Mechanical", "Механика"), ("Robotic", "Роботизированная"), ("Variative", "Вариативная")])
-    actuator = SelectField('Привод', choices=[("Rear", "Задний (RWD)"), ("Front", "Передний (FWD)"), ("Full", "Полный (AWD / 4WD)")])
+    transmission = SelectField('КПП', choices=[("Automatic", "Автоматическая"), ("Mechanical", "Механика"),
+                                               ("Robotic", "Роботизированная"), ("Variative", "Вариативная")])
+    actuator = SelectField('Привод', choices=[("Rear", "Задний (RWD)"), ("Front", "Передний (FWD)"),
+                                              ("Full", "Полный (AWD / 4WD)")])
+    color = SelectField('Цвет авто',
+                        choices=[("Red", "Красный"), ("White", "Белый"), ("Black", "Черный"), ("Blue", "Синий"),
+                                 ("Green", "Зеленый"), ("Yellow", "Желтый"),
+                                 ("Orange", "Оранжевый"),
+                                 ("Purple", "Фиолетовый"),
+                                 ("Pink", "Розовый"),
+                                 ("Brown", "Коричневый"),
+                                 ("Gray", "Серый"),
+                                 ("Silver", "Серебряный"),
+                                 ("Gold", "Золотой"),
+                                 ("Cyan", "Бирюзовый"),
+                                 ("Magenta", "Пурпурный")])
+steering_wheel = SelectField('Руль', choices=[("Left", "Левый"), ("Right", "Правый")])
+body = SelectField('Кузов', choices=[("Sedan", "Седан"),
+    ("Coupe", "Купе"),
+    ("Liftback", "Лифтбэк"),
+    ("Hatchback", "Хэтчбек"),
+    ("SUV", "Внедорожник"),
+    ("Minivan", "Минивэн"),
+    ("Pickup", "Пикап"),
+    ("Convertible", "Кабриолет"),
+    ("Wagon", "Универсал"),
+    ("Crossover", "Кроссовер"),
+    ("Roadster", "Родстер"),
+    ("Van", "Фургон"),
+    ("Limousine", "Лимузин"),
+    ("Targa", "Тарга")])
+engine_displacement = IntegerField('Объем двигателя', default=1, validators=[DataRequired()])
+status = SelectField('Состояние', choices=[("Battered", "Битый"), ("Unscathed", "Небитый")])
