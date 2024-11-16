@@ -1,6 +1,6 @@
 from typing import final
 
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 from grz import generate_grz
 from dataclasses import asdict
 from random import randint
@@ -21,9 +21,7 @@ def generate_cars(n: int):
         cars.append(car)
 
 
-def addCar(model, company_name, year_of_production, country_of_production, power, mileage, transmission, actuator, color, steering_wheel, body, engine_displacement, status):
-
-    grz_car = grz.generate_grz()
+def addCar(grz_car, model, company_name, year_of_production, country_of_production, power, mileage, transmission, actuator, color, steering_wheel, body, engine_displacement, status):
     car = Car(grz_car, model, company_name, year_of_production, country_of_production, power, mileage, transmission, actuator, color, steering_wheel, body, engine_displacement, status)
     cars.append(car)
 
@@ -55,11 +53,14 @@ def signUp():
         body = form.body.data
         engine_displacement = form.engine_displacement.data
         status = form.status.data
+        fileimage = request.files["image"]
+
+        car_grz = generate_grz()
+        root = app.root_path
+        fileimage.save(f"{root}\static\images/{car_grz}.{fileimage.filename.split('.')[-1]}")
 
 
-
-
-        addCar(model, company_name, year_of_production, country_of_production, power, mileage, transmission, actuator, color, steering_wheel, body, engine_displacement, status)
+        addCar(car_grz, model, company_name, year_of_production, country_of_production, power, mileage, transmission, actuator, color, steering_wheel, body, engine_displacement, status)
         return redirect("/garage")
 
     return render_template("formTemplate.html", form=form, btn_name="Зарегистрировать авто")
@@ -79,8 +80,8 @@ def getCar(car_id: str):
     return str(None)
 
 
-@app.route("/delCar/<int:car_id>")
-def delCar(car_id: str):
+@app.route("/delCar/<car_id>")
+def delCar(car_id: int):
     for car in cars:
         if car.id == car_id:
             cars.remove(car)

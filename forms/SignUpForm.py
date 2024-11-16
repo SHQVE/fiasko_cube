@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms.fields.choices import SelectField
 from wtforms.fields.numeric import IntegerField
-from wtforms.fields.simple import StringField, PasswordField, EmailField
+from wtforms.fields.simple import StringField, PasswordField, EmailField, FileField
 from wtforms.validators import DataRequired, Email
 
 
@@ -41,20 +41,24 @@ class SignUpForm(FlaskForm):
                                  ("Gold", "Золотой"),
                                  ("Cyan", "Бирюзовый"),
                                  ("Magenta", "Пурпурный")])
-steering_wheel = SelectField('Руль', choices=[("Left", "Левый"), ("Right", "Правый")])
-body = SelectField('Кузов', choices=[("Sedan", "Седан"),
-    ("Coupe", "Купе"),
-    ("Liftback", "Лифтбэк"),
-    ("Hatchback", "Хэтчбек"),
-    ("SUV", "Внедорожник"),
-    ("Minivan", "Минивэн"),
-    ("Pickup", "Пикап"),
-    ("Convertible", "Кабриолет"),
-    ("Wagon", "Универсал"),
-    ("Crossover", "Кроссовер"),
-    ("Roadster", "Родстер"),
-    ("Van", "Фургон"),
-    ("Limousine", "Лимузин"),
-    ("Targa", "Тарга")])
-engine_displacement = IntegerField('Объем двигателя', default=1, validators=[DataRequired()])
-status = SelectField('Состояние', choices=[("Battered", "Битый"), ("Unscathed", "Небитый")])
+    steering_wheel = SelectField('Руль', choices=[("Left", "Левый"), ("Right", "Правый")])
+    body = SelectField('Кузов',
+                       choices=[("Sedan", "Седан"),
+                                ("Coupe", "Купе"),
+                                ("Liftback", "Лифтбэк"),
+                                ("Hatchback", "Хэтчбек"),
+                                ("SUV", "Внедорожник"),
+                                ("Minivan", "Минивэн"),
+                                ("Pickup", "Пикап"),
+                                ("Convertible", "Кабриолет"),
+                                ("Wagon", "Универсал"),
+                                ("Crossover", "Кроссовер"),
+                                ("Roadster", "Родстер"),
+                                ("Van", "Фургон"),
+                                ("Limousine", "Лимузин"),
+                                ("Targa", "Тарга")])
+    engine_displacement = IntegerField('Объем двигателя', default=1, validators=[DataRequired()])
+    status = SelectField('Состояние',
+                         choices=[("Battered", "Битый"),
+                                  ("Unscathed", "Небитый")])
+    image=FileField("img")
