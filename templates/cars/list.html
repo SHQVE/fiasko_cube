@@ -16,7 +16,7 @@
     {% for car in cars %}
     <a href="cars/{{ car.id }}" class="list-group-item list-group-item-action" aria-current="true">
         <div class="d-flex w-100 justify-content-between">
-            <img width="64px" src="static/images/{{ car.id }}.jpg" alt="">
+
             <h5 class="mb-1">{{ car.company_name }}</h5>
             <small>{{ car.country_of_production }}</small>
         </div>
