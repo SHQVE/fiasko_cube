@@ -11,7 +11,8 @@
 </head>
 <body>
 <span class="p-2 m-0">{{ count }}</span>
-<a href="/signUp" type="button" class="btn btn-primary m-2">Зарегистрировать машину</a>
+<a href="/signUp" type="button" class="btn btn-success m-2">Зарегистрировать машину</a>
+<button type="button" class="btn btn-dark">Зайти на рынок</button>
 <div class="list-group overflow-auto p-2">
     {% for car in cars %}
     <a href="cars/{{ car.id }}" class="list-group-item list-group-item-action" aria-current="true">

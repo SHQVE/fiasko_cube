@@ -7,7 +7,7 @@ def create_table():
     db.execute("""
         CREATE TABLE IF NOT EXISTS Cars (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email TEXT NOT NULL,
+            model TEXT NOT NULL,
             company_name TEXT NOT NULL,
             year_of_production TEXT NOT NULL,
             country_of_production TEXT NOT NULL,
@@ -17,7 +17,8 @@ def create_table():
             actuator TEXT NOT NULL,
             color INTEGER NOT NULL,
             body TEXT NOT NULL,
-            password TEXT NOT NULL
+            engine_displacement TEXT NOT NULL,
+            status TEXT NOT NULL
         )
     """)
 
@@ -26,7 +27,7 @@ def add_car(car: models.Car):
     db = database.get_db()
     db.execute(
         "insert into Cars (email, name, age, city, password) values (?, ?, ?, ?, ?)",
-        (car.email, car.name, car.age, car.city, car.password,)
+        (car.model, car.company_name, car.year_of_production, car.country_of_production, car.color)
     )
     db.commit()
 
