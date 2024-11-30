@@ -17,12 +17,15 @@ cars = []
 def generate_cars(n: int):
     for i in range(n):
         grz_car = grz.generate_grz()
-        car = Car(grz_car, "Corvette C7", "Chevrolet", 2019, "USA", 1000, 500, "Механическая", "Задний", "Черный", "Правый", "Лифтбэк", 3.5, "небитый")
+        car = Car(grz_car, "Corvette C7", "Chevrolet", 2019, "USA", 1000, 500, "Механическая", "Задний", "Черный",
+                  "Правый", "Лифтбэк", 3.5, "небитый")
         cars.append(car)
 
 
-def addCar(grz_car, model, company_name, year_of_production, country_of_production, power, mileage, transmission, actuator, color, steering_wheel, body, engine_displacement, status):
-    car = Car(grz_car, model, company_name, year_of_production, country_of_production, power, mileage, transmission, actuator, color, steering_wheel, body, engine_displacement, status)
+def addCar(grz_car, model, company_name, year_of_production, country_of_production, power, mileage, transmission,
+           actuator, color, steering_wheel, body, engine_displacement, status):
+    car = Car(grz_car, model, company_name, year_of_production, country_of_production, power, mileage, transmission,
+              actuator, color, steering_wheel, body, engine_displacement, status)
     cars.append(car)
 
 
@@ -32,7 +35,6 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     return render_template("index.html")
-
 
 
 @app.route("/signUp", methods=['GET', 'POST'])
@@ -59,8 +61,8 @@ def signUp():
         root = app.root_path
         fileimage.save(f"{root}\static\images/{car_grz}.{fileimage.filename.split('.')[-1]}")
 
-
-        addCar(car_grz, model, company_name, year_of_production, country_of_production, power, mileage, transmission, actuator, color, steering_wheel, body, engine_displacement, status)
+        addCar(car_grz, model, company_name, year_of_production, country_of_production, power, mileage, transmission,
+               actuator, color, steering_wheel, body, engine_displacement, status)
         return redirect("/garage")
 
     return render_template("formTemplate.html", form=form, btn_name="Зарегистрировать авто")
@@ -69,6 +71,11 @@ def signUp():
 @app.route("/garage", methods=['GET', 'POST'])
 def getCars():
     return render_template("cars/list.html", cars=cars, count=len(cars))
+
+
+@app.route("/market", methods=['GET', 'POST'])
+def marketplace():
+    return render_template("cars/market.html", cars=cars)
 
 
 @app.route("/cars/<car_id>")

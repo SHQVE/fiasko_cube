@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Продажа автомобилей</title>
+</head>
+<body>
+    <h1>Продажа автомобилей</h1>
+    <div class="car-list">
+        {% for car in cars %}
+            <div class="car">
+                <h2>{{ car.model }}</h2>
+                <img src="{{ car.image }}" alt="{{ car.model }}">
+                <p>Цена: {{ car.price }}$</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
