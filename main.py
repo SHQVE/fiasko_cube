@@ -18,14 +18,14 @@ def generate_cars(n: int):
     for i in range(n):
         grz_car = grz.generate_grz()
         car = Car(grz_car, "Corvette C7", "Chevrolet", 2019, "USA", 1000, 500, "Механическая", "Задний", "Черный",
-                  "Правый", "Лифтбэк", 3.5, "небитый")
+                  "Правый", "Лифтбэк", 3.5, "небитый", 3500000)
         cars.append(car)
 
 
 def addCar(grz_car, model, company_name, year_of_production, country_of_production, power, mileage, transmission,
-           actuator, color, steering_wheel, body, engine_displacement, status):
+           actuator, color, steering_wheel, body, engine_displacement, status, price):
     car = Car(grz_car, model, company_name, year_of_production, country_of_production, power, mileage, transmission,
-              actuator, color, steering_wheel, body, engine_displacement, status)
+              actuator, color, steering_wheel, body, engine_displacement, status, price)
     cars.append(car)
 
 
@@ -56,13 +56,14 @@ def signUp():
         engine_displacement = form.engine_displacement.data
         status = form.status.data
         fileimage = request.files["image"]
+        price = form.price.data
 
         car_grz = generate_grz()
         root = app.root_path
         fileimage.save(f"{root}\static\images/{car_grz}.{fileimage.filename.split('.')[-1]}")
 
         addCar(car_grz, model, company_name, year_of_production, country_of_production, power, mileage, transmission,
-               actuator, color, steering_wheel, body, engine_displacement, status)
+               actuator, color, steering_wheel, body, engine_displacement, status, price)
         return redirect("/garage")
 
     return render_template("formTemplate.html", form=form, btn_name="Зарегистрировать авто")
@@ -98,6 +99,6 @@ def delCar(car_id: int):
 
 
 if __name__ == '__main__':
-    generate_cars(5)
+    generate_cars(1)
     app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
     app.run(debug=True, port=8888)

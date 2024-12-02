@@ -18,7 +18,8 @@ def create_table():
             color INTEGER NOT NULL,
             body TEXT NOT NULL,
             engine_displacement TEXT NOT NULL,
-            status TEXT NOT NULL
+            status TEXT NOT NULL,
+            price TEXT NOT NULL
         )
     """)
 
@@ -27,7 +28,7 @@ def add_car(car: models.Car):
     db = database.get_db()
     db.execute(
         "insert into Cars (email, name, age, city, password) values (?, ?, ?, ?, ?)",
-        (car.model, car.company_name, car.year_of_production, car.country_of_production, car.color)
+        (car.model, car.company_name, car.year_of_production, car.country_of_production, car.color, car.price)
     )
     db.commit()
 

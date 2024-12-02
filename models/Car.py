@@ -17,3 +17,4 @@ class Car:
     body: str
     engine_displacement: int
     status: str
+    price: int

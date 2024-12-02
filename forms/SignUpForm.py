@@ -61,4 +61,5 @@ class SignUpForm(FlaskForm):
     status = SelectField('Состояние',
                          choices=[("Battered", "Битый"),
                                   ("Unscathed", "Небитый")])
-    image=FileField("img")
+    image = FileField("img (Обязательно фото размером 320 x 214! )")
+    price = IntegerField('Цена', validators=[DataRequired()])
