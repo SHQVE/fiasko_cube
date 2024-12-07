@@ -6,11 +6,27 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<style>
+    body {
+        background-image: url('{{ url_for('static', filename='bg-negro.png') }}');
+        background-size: cover;
+        background-position: center;
+        margin: 0;
+        height: 100vh;
+    }
+</style>
 <body>
-<div class="card m-2" style="width:119rem;">
+</body>
+</html>
+<body>
+<div class="card m-2" style="width:114rem;">
     <div class="card-body">
         <div class="flex">
-            <div class="">
+            <div class="text-dark-emphasis">
                 <h5 class="card-title"> {{ car.company_name }}</h5>
                 <p class="card-text">Model: {{ car.model }} </p>
                 <p class="card-text">Power: {{ car.power }} </p>
@@ -27,7 +43,8 @@
                 <p class="card-text">Year: {{ car.year_of_production }} </p>
                 <p class="card-text">Price: {{ car.price }} </p>
             </div>
-            <img width="720px" src="/static/images/{{ car.id }}.jpg" class="rounded float-end position-absolute top-0 end-0 m-3" alt="squazimambze">
+            <img width="720px" src="/static/images/{{ car.id }}.jpg"
+                 class="rounded float-end position-absolute top-0 end-0 m-3" alt="squazimambze">
         </div>
 
         <a href="/delCar/{{ car.id }}" type="button" class="btn btn-danger w-100" id="btnDel">Удалить</a>

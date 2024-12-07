@@ -79,6 +79,14 @@ def marketplace():
     return render_template("cars/market.html", cars=cars)
 
 
+@app.route("/buy/<car_id>", methods=['GET', 'POST'])
+def buycars(car_id: str):
+    for car in cars:
+        if car.id == car_id:
+            return render_template("cars/buycar.html", car=car)
+    return redirect("")
+
+
 @app.route("/cars/<car_id>")
 def getCar(car_id: str):
     for car in cars:

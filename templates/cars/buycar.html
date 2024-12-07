@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Купить</title>
+</head>
+<body>
+<div class="container">
+    <h1>Добро пожаловать! Оформите покупку</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <div class="car-card">
+        <h2>Модель: {{ car.model }}</h2>
+        <p>Цена: {{ car.price }}</p>
+        <p>Компания: {{ car.company_name }}</p>
+        <p>Год: {{ car.year_of_production }}</p>
+        <p>Страна: {{ car.country_of_production }}</p>
+        <p>Мощность Двигателя: {{ car.power }}</p>
+        <p>Пробег: {{ car.mileage }}</p>
+        <p>КПП: {{ car.transmission }}</p>
+        <p>Привод: {{ car.actuator }}</p>
+        <p>Цвет: {{ car.color }}</p>
+        <p>Руль: {{ car.steering_wheel }}</p>
+        <p>Кузов: {{ car.body }}</p>
+        <p>Объем двигателя: {{ car.engine_displacement }}</p>
+        <p>Состояние: {{ car.status }}</p>
+        <form action="/buy" method="POST">
+            <input type="hidden" name="car_model" value="Tesla Model S">
+            <button type="submit">Купить</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
