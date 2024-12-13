@@ -4,15 +4,18 @@ from flask import Flask, render_template, redirect, request
 from grz import generate_grz
 from dataclasses import asdict
 from random import randint
+from flask_login import LoginManager, login_required, login_user, logout_user
 
+import repositories
 import grz
 from forms.SignUpForm import SignUpForm
+from forms.RegisterForm import RegisterForm
 from forms.form import GravitationForm
 from models.Car import Car
-from models.User import User
+from models.Company import Company
+from utils import Link
 
 cars = []
-
 
 def generate_cars(n: int):
     for i in range(n):
@@ -32,9 +35,70 @@ def addCar(grz_car, model, company_name, year_of_production, country_of_producti
 app = Flask(__name__)
 
 
+def addCompany(email, new_name_company, age, city, password):
+    company = Company(None, email, new_name_company, age, city, password)
+    repositories.add_user(company)
+
+
+
 @app.route('/')
 def hello_world():
     return render_template("index.html")
+
+
+app = Flask(__name__)
+login_manager = LoginManager()
+
+@login_manager.user_loader
+def load_company(company_id):
+    return repositories.get_user(company_id)
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    forma = RegisterForm()
+
+    if forma.validate_on_submit():
+        email = forma.email.data
+        new_name_company = forma.new_name_company.data
+        age = forma.age.data
+        city = forma.city.data
+        password = forma.password.data
+        confirm_password = forma.confirm_password.data
+
+        if password != confirm_password:
+            return render_template(
+                "formTemplate.html",
+                form=forma,
+                btn_name="Регистрация!",
+                error="Пароли не совпадают!"
+            )
+
+        addCompany(email, new_name_company, age, city, password)
+        return redirect("/company")
+
+    return render_template("formTemplate.html", form=forma, btn_name="Регистрация!")
+
+
+
+@app.route("/company/<int:company_id>")
+@login_required
+def getCompany(company_id: int):
+    company = repositories.get_user()
+
+    for companya in company:
+        if companya.id == company_id:
+            return render_template(
+                "layout/car-layout.html",
+                links=[
+                    Link("Home", "/"),
+                    Link("Add Company", "/add"),
+                    Link("Delete Company", f"/delUser/{companya.id}", class_name="bg-danger"),
+                ],
+                companya=companya
+            )
+
+    return redirect("/")
 
 
 @app.route("/signUp", methods=['GET', 'POST'])
@@ -80,7 +144,7 @@ def marketplace():
 
 
 @app.route("/buy/<car_id>", methods=['GET', 'POST'])
-def buycars(car_id: str):
+def buy_cars(car_id: str):
     for car in cars:
         if car.id == car_id:
             return render_template("cars/buycar.html", car=car)
