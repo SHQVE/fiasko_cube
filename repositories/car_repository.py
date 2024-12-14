@@ -1,5 +1,6 @@
 import models
 import database
+from models.Car import Car
 
 
 def create_table():
@@ -20,14 +21,16 @@ def create_table():
             engine_displacement TEXT NOT NULL,
             status TEXT NOT NULL,
             price TEXT NOT NULL
-        )
+        );
+        
+        
     """)
 
 
-def add_car(car: models.Car):
+def add_car(car: Car):
     db = database.get_db()
     db.execute(
-        "insert into Cars (email, name, age, city, password) values (?, ?, ?, ?, ?)",
+        "insert into Cars (model, company_name, year_of_production, country_of_production, power, mileage, transmission, actuator, color, body, engine_displacement, status, price, password) values (?, ?, ?, ?, ?)",
         (car.model, car.company_name, car.year_of_production, car.country_of_production, car.color, car.price)
     )
     db.commit()
@@ -36,7 +39,7 @@ def add_car(car: models.Car):
 def get_cars():
     db = database.get_db()
     rows = db.execute("SELECT * FROM Cars").fetchall()
-    return list(map(lambda row: models.Car(*row), rows))
+    return list(map(lambda row: Car(*row), rows))
 
 
 def delete_car(car: models.Car):

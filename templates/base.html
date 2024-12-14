@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Главная</a>
+         {% if user %}
+        <a href="{{ url_for('profile') }}">Профиль</a>
+         <a href="{{ url_for('logout') }}">Выход</a>
+        {% else %}
+        <a href="{{ url_for('register') }}">Регистрация</a>
+        <a href="{{ url_for('login') }}">Вход</a>
+        {% endif %}
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>

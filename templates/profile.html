@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+  <h2>Профиль пользователя</h2>
+    {% if username %}
+        <p>Вы вошли как {{ username }}.</p>
+    {% else %}
+        <p>Вы не авторизованы. <a href="{{ url_for('login') }}">Войти</a></p>
+    {% endif %}
+{% endblock %}

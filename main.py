@@ -10,12 +10,13 @@ import repositories
 import grz
 from forms.SignUpForm import SignUpForm
 from forms.RegisterForm import RegisterForm
-from forms.form import GravitationForm
+from forms.LoginForm import LoginForm
 from models.Car import Car
 from models.Company import Company
-from utils import Link
+from utilss import Link
 
 cars = []
+
 
 def generate_cars(n: int):
     for i in range(n):
@@ -40,14 +41,13 @@ def addCompany(email, new_name_company, age, city, password):
     repositories.add_user(company)
 
 
-
 @app.route('/')
 def hello_world():
     return render_template("index.html")
 
 
-app = Flask(__name__)
 login_manager = LoginManager()
+
 
 @login_manager.user_loader
 def load_company(company_id):
@@ -79,6 +79,31 @@ def register():
 
     return render_template("formTemplate.html", form=forma, btn_name="Регистрация!")
 
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    formo = LoginForm()
+
+    if formo.validate_on_submit():
+        email = formo.email.data
+        new_name_company = formo.new_name_company.data
+        age = formo.age.data
+        city = formo.city.data
+        password = formo.password.data
+        confirm_password = formo.confirm_password.data
+
+        if password != confirm_password:
+            return render_template(
+                "formTemplate.html",
+                form=formo,
+                btn_name="Вход!",
+                error="Пароли не совпадают!"
+            )
+
+        addCompany(email, new_name_company, age, city, password)
+        return redirect("/company")
+
+    return render_template("formTemplate.html", form=formo, btn_name="Вход!")
 
 
 @app.route("/company/<int:company_id>")
