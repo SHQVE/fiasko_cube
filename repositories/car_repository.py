@@ -1,6 +1,7 @@
 import models
 import database
 from models.Car import Car
+from models.Company import Company
 
 
 def create_table():
@@ -22,7 +23,20 @@ def create_table():
             status TEXT NOT NULL,
             price TEXT NOT NULL
         );
-        
+        CREATE TABLE IF NOT EXISTS Company (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                email TEXT NOT NULL,
+                new_name_company TEXT NOT NULL,
+                age TEXT NOT NULL,
+                city TEXT NOT NULL,
+                password TEXT NOT NULL,
+                confirm_password TEXT NOT NULL
+            );   
+         CREATE TABLE IF NOT EXISTS Garage (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            company_id In,
+            car_id int
+            );   
         
     """)
 

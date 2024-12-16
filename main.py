@@ -13,9 +13,11 @@ from forms.RegisterForm import RegisterForm
 from forms.LoginForm import LoginForm
 from models.Car import Car
 from models.Company import Company
+from repositories import create_table
 from utilss import Link
 
 cars = []
+garage = []
 
 
 def generate_cars(n: int):
@@ -170,10 +172,13 @@ def marketplace():
 
 @app.route("/buy/<car_id>", methods=['GET', 'POST'])
 def buy_cars(car_id: str):
-    for car in cars:
-        if car.id == car_id:
-            return render_template("cars/buycar.html", car=car)
-    return redirect("")
+    if request.method == "POST":
+        ...
+    else:
+        for car in cars:
+            if car.id == car_id:
+                return render_template("cars/buycar.html", car=car)
+        return redirect("")
 
 
 @app.route("/cars/<car_id>")
@@ -197,5 +202,8 @@ def delCar(car_id: int):
 
 if __name__ == '__main__':
     generate_cars(1)
+    # login_manager.init_app(app)
+    # app.app_context().push()
+    # create_table()
     app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
     app.run(debug=True, port=8888)
