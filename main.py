@@ -162,7 +162,7 @@ def signUp():
 
 @app.route("/garage", methods=['GET', 'POST'])
 def getCars():
-    return render_template("cars/list.html", cars=cars, count=len(cars))
+    return render_template("cars/list.html", cars=garage, count=len(cars))
 
 
 @app.route("/market", methods=['GET', 'POST'])
@@ -173,17 +173,20 @@ def marketplace():
 @app.route("/buy/<car_id>", methods=['GET', 'POST'])
 def buy_cars(car_id: str):
     if request.method == "POST":
-        ...
+        for i, car in enumerate(cars):
+            if car.id == car_id:
+                garage.append(cars.pop(i))
+        return redirect("/garage")
     else:
         for car in cars:
             if car.id == car_id:
-                return render_template("cars/buycar.html", car=car)
+                return render_template("cars/buycar.html", car=car, garage=garage)
         return redirect("")
 
 
 @app.route("/cars/<car_id>")
 def getCar(car_id: str):
-    for car in cars:
+    for car in cars + garage:
         if car.id == car_id:
             return render_template("cars/car.html", car=car)
 
