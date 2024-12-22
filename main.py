@@ -8,6 +8,7 @@ from flask_login import LoginManager, login_required, login_user, logout_user
 
 import repositories
 import grz
+import random
 from forms.SignUpForm import SignUpForm
 from forms.RegisterForm import RegisterForm
 from forms.LoginForm import LoginForm
@@ -45,7 +46,7 @@ def addCompany(email, new_name_company, age, city, password):
 
 @app.route('/')
 def hello_world():
-    return render_template("index.html")
+    return render_template('index.html')
 
 
 login_manager = LoginManager()
@@ -186,9 +187,10 @@ def buy_cars(car_id: str):
 
 @app.route("/cars/<car_id>")
 def getCar(car_id: str):
+    positions = [(random.randint(0, 99), random.uniform(5, 15)) for _ in range(200)]
     for car in cars + garage:
         if car.id == car_id:
-            return render_template("cars/car.html", car=car)
+            return render_template("cars/car.html", car=car, positions=positions)
 
     return str(None)
 
@@ -204,7 +206,7 @@ def delCar(car_id: int):
 
 
 if __name__ == '__main__':
-    generate_cars(1)
+    generate_cars(6)
     # login_manager.init_app(app)
     # app.app_context().push()
     # create_table()

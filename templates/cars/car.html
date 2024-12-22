@@ -17,11 +17,12 @@
         margin: 0;
         height: 100vh;
     }
+     body { background-color: #000; overflow: hidden; } .snowflake { position: absolute; top: -20px; left: 0; color: white; font-size: 12px; animation: fall var(--duration) linear infinite; } @keyframes fall { from {transform: translateX(var(--x-offset));} to {transform: translateX(var(--x-offset)) translateY(100vh);} }
 </style>
 <body>
 </body>
 </html>
-<body class="p-5">
+<body class="p-4">
 <div class="card m-2" style="width:117rem;">
     <div class="card-body">
         <div class="flex">
@@ -49,6 +50,10 @@
         <a href="/delCar/{{ car.id }}" type="button" class="btn btn-danger w-100" id="btnDel">Удалить</a>
         <a href="/garage" type="button" class="btn btn-dark w-100 mt-3">Обратно</a>
     </div>
+    {% for pos, duration in positions %}
+    <span class="snowflake" style="--x-offset: {{ pos }}%; --duration: {{ duration }}s;">*</span>
+    {% endfor %}
+
 </div>
 <script>
     const $btn = document.getElementById("btnDel")

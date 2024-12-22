@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms.fields.choices import SelectField
-from wtforms.fields.numeric import IntegerField
+from wtforms.fields.numeric import IntegerField, FloatField
 from wtforms.fields.simple import StringField, PasswordField, EmailField, FileField
 from wtforms.validators import DataRequired, Email
 
@@ -19,10 +19,11 @@ from wtforms.validators import DataRequired, Email
 
 
 class SignUpForm(FlaskForm):
+    company_name = StringField('Марка авто', validators=[DataRequired()])
     model = StringField('Модель авто', validators=[DataRequired()])
-    company_name = StringField('Название компании!', validators=[DataRequired()])
-    year_of_production = IntegerField('Год издания', default=2024, validators=[DataRequired()])
-    country_of_production = StringField('Страна производства', validators=[DataRequired()])
+    year_of_production = IntegerField('Год', default=2024, validators=[DataRequired()])
+    country_of_production = SelectField('Страна', choices=[("Russia", "Россия"), ("USA", "Америка"),
+                                              ("Japan", "Япония")])
     power = IntegerField('Мощность', validators=[DataRequired()])
     mileage = IntegerField('Пробег', validators=[DataRequired()])
     transmission = SelectField('КПП', choices=[("Automatic", "Автоматическая"), ("Mechanical", "Механика"),
@@ -57,7 +58,7 @@ class SignUpForm(FlaskForm):
                                 ("Van", "Фургон"),
                                 ("Limousine", "Лимузин"),
                                 ("Targa", "Тарга")])
-    engine_displacement = IntegerField('Объем двигателя', default=1, validators=[DataRequired()])
+    engine_displacement = FloatField('Объем двигателя  л^3', default=1, validators=[DataRequired()])
     status = SelectField('Состояние',
                          choices=[("Battered", "Битый"),
                                   ("Unscathed", "Небитый")])
