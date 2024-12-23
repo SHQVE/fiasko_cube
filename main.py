@@ -15,7 +15,7 @@ from forms.LoginForm import LoginForm
 from models.Car import Car
 from models.Company import Company
 from repositories import create_table
-from utilss import Link
+from utilss.Link import Link
 
 cars = []
 garage = []

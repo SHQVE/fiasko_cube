@@ -15,9 +15,25 @@
         background-size: cover;
         background-position: center;
         margin: 0;
-        height: 100vh;
+        height: auto;
     }
-     body { background-color: #000; overflow: hidden; } .snowflake { position: absolute; top: -20px; left: 0; color: white; font-size: 12px; animation: fall var(--duration) linear infinite; } @keyframes fall { from {transform: translateX(var(--x-offset));} to {transform: translateX(var(--x-offset)) translateY(100vh);} }
+body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #282c34;
+        }
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
 </style>
 <body>
 </body>
@@ -50,10 +66,18 @@
         <a href="/delCar/{{ car.id }}" type="button" class="btn btn-danger w-100" id="btnDel">Удалить</a>
         <a href="/garage" type="button" class="btn btn-dark w-100 mt-3">Обратно</a>
     </div>
-    {% for pos, duration in positions %}
-    <span class="snowflake" style="--x-offset: {{ pos }}%; --duration: {{ duration }}s;">*</span>
-    {% endfor %}
-
+    <script>
+        const snowflakeCount = 100;
+        for (let i = 0; i < snowflakeCount; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerHTML = '*';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.fontSize = Math.random() * 1 + 0.5 + 'em';
+            document.body.appendChild(snowflake);
+        }
+    </script>
 </div>
 <script>
     const $btn = document.getElementById("btnDel")

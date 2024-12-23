@@ -15,6 +15,24 @@
             margin: 0;
             height: 100vh;
         }
+        <style>
+    body {
+                margin: 0;
+                overflow: hidden;
+                background-color: #282c34;
+            }
+            .snowflake {
+                position: absolute;
+                top: -10px;
+                color: white;
+                font-size: 1em;
+                pointer-events: none;
+                animation: fall linear infinite;
+            }
+            @keyframes fall {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(352vh); }
+            }
     </style>
 </head>
 <body>
@@ -32,6 +50,18 @@
                 content.</p>
             <a href="/buy/{{ car.id }}" class="btn btn-info">Купить: {{ car.price }}$</a>
         </div>
+          <script>
+        const snowflakeCount = 100;
+        for (let i = 0; i < snowflakeCount; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerHTML = '*';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.fontSize = Math.random() * 1 + 0.5 + 'em';
+            document.body.appendChild(snowflake);
+        }
+    </script>
     </div>
     {% endfor %}
 </div>

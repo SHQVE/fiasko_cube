@@ -18,6 +18,25 @@
         }
     </style>
 </head>
+<style>
+    body {
+                margin: 0;
+                overflow: hidden;
+                background-color: #282c34;
+            }
+            .snowflake {
+                position: absolute;
+                top: -10px;
+                color: white;
+                font-size: 1em;
+                pointer-events: none;
+                animation: fall linear infinite;
+            }
+            @keyframes fall {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(100vh); }
+            }
+</style>
 <body>
 <span class="p-2 m-0">{{ count }}</span>
 <a href="/signUp" type="button" class="btn btn-light m-2">Зарегистрировать машину</a>
@@ -34,6 +53,18 @@
         <small>{{ car.year_of_production }}</small>
     </a>
     {% endfor %}
+    <script>
+        const snowflakeCount = 100;
+        for (let i = 0; i < snowflakeCount; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerHTML = '*';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.fontSize = Math.random() * 1 + 0.5 + 'em';
+            document.body.appendChild(snowflake);
+        }
+    </script>
 </div>
 </body>
 </html>
